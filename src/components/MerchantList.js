@@ -1,24 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Avatar from '@material-ui/core/Avatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
-const MerchantList = ({ merchants, deleteMerchant }) => (
-  <div>
+const styles = theme => ({
+  extendedFab: {
+    position: 'fixed',
+    bottom: 2 * theme.spacing.unit,
+    right: 2 * theme.spacing.unit
+  }
+});
+
+const MerchantList = ({ merchants, classes }) => (
+  <List>
     {merchants.map(merchant => (
-      <div key={merchant.id}>
-        {merchant.firstname} {merchant.lastname}
-        <img src={merchant.avatarUrl} alt={merchant.firstname} />
-        <div>{merchant.email}</div>
-        <div>{merchant.phone}</div>
-        <div>{merchant.hasPremium}</div>
-        <Link to={`/merchants/${merchant.id}/edit`}>Edit Merchant</Link>
-        <button onClick={() => deleteMerchant(merchant.id)}>
-          Remove merchant
-        </button>
-      </div>
+      <ListItem key={merchant.id} dense button>
+        <Avatar alt={merchant.firstname} src={merchant.avatarUrl} />
+        <ListItemText
+          primary={`${merchant.firstname} ${merchant.lastname}`}
+          secondary={merchant.email}
+        />
+        <ListItemSecondaryAction>
+          <IconButton
+            component={Link}
+            to={`/merchants/${merchant.id}/edit`}
+            aria-label="Edit"
+          >
+            <EditIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
     ))}
-    <Link to="/merchants/new">Create new Merchant</Link>
-  </div>
+    <Button
+      variant="fab"
+      color="primary"
+      aria-label="Add"
+      component={Link} to="/merchants/new"
+      className={classes.extendedFab}
+    >
+      <AddIcon />
+    </Button>
+  </List>
 );
 
 MerchantList.propTypes = {
@@ -40,8 +71,7 @@ MerchantList.propTypes = {
         })
       ).isRequired
     })
-  ).isRequired,
-  deleteMerchant: PropTypes.func.isRequired
+  ).isRequired
 };
 
-export default MerchantList;
+export default withStyles(styles)(MerchantList);

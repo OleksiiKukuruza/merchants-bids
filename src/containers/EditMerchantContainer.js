@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
 import EditMerchant from '../components/EditMerchant';
-import { fetchMerchantById, updateMerchant } from '../actions/merchants';
+import {
+  deleteMerchant,
+  fetchMerchantById,
+  updateMerchant
+} from '../actions/merchants';
 import { reduxForm } from 'redux-form';
 import { getMerchantById } from '../selectors';
 
@@ -20,7 +24,8 @@ const withData = connect(
   mapStateToProps,
   {
     fetchMerchantById,
-    updateMerchant
+    updateMerchant,
+    deleteMerchant
   }
 );
 
