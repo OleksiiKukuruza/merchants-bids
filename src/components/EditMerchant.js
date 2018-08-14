@@ -4,6 +4,25 @@ import { Field } from 'redux-form';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import { withStyles } from '@material-ui/core/styles';
+import TextInput from './TextInput';
+import CheckboxInput from './CheckboxInput';
+
+const styles = theme => ({
+  container: {
+    padding: 2 * theme.spacing.unit
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  deleteButton: {
+    marginRight: 2 * theme.spacing.unit
+  },
+  buttonIcon: {
+    marginRight: theme.spacing.unit
+  }
+});
 
 const EditMerchant = ({
   handleSubmit,
@@ -11,31 +30,32 @@ const EditMerchant = ({
   match: {
     params: { id }
   },
-  history
+  history,
+  classes
 }) => (
-  <div>
-    <Field name="firstname" component="input" placeholder="First Name" />
-    <Field name="lastname" component="input" placeholder="Last Name" />
-    <Field name="email" component="input" type="email" placeholder="Email" />
-    <Field
-      name="phone"
-      component="input"
-      type="tel"
-      placeholder="Phone Number"
-    />
-    <Field name="hasPremium" component="input" type="checkbox" />
-    <Button
-      variant="contained"
-      color="secondary"
-      onClick={() => deleteMerchant(id).then(() => history.push('/merchants'))}
-    >
-      <DeleteIcon />
-      Remove
-    </Button>
-    <Button variant="contained" onClick={handleSubmit}>
-      <SaveIcon />
-      Save
-    </Button>
+  <div className={classes.container}>
+    <Field name="firstname" component={TextInput} label="First Name" />
+    <Field name="lastname" component={TextInput} label="Last Name" />
+    <Field name="email" component={TextInput} type="email" label="Email" />
+    <Field name="phone" component={TextInput} type="tel" label="Phone Number" />
+    <Field name="hasPremium" component={CheckboxInput} label="Has premium" />
+    <div className={classes.buttons}>
+      <Button
+        variant="contained"
+        color="secondary"
+        className={classes.deleteButton}
+        onClick={() =>
+          deleteMerchant(id).then(() => history.push('/merchants'))
+        }
+      >
+        <DeleteIcon className={classes.buttonIcon} />
+        Remove
+      </Button>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        <SaveIcon className={classes.buttonIcon} />
+        Save
+      </Button>
+    </div>
   </div>
 );
 
@@ -44,4 +64,4 @@ EditMerchant.propTypes = {
   deleteMerchant: PropTypes.func.isRequired
 };
 
-export default EditMerchant;
+export default withStyles(styles)(EditMerchant);

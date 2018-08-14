@@ -44,7 +44,8 @@ const MerchantList = ({ merchants, classes }) => (
       variant="fab"
       color="primary"
       aria-label="Add"
-      component={Link} to="/merchants/new"
+      component={Link}
+      to="/merchants/new"
       className={classes.extendedFab}
     >
       <AddIcon />
