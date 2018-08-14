@@ -25,14 +25,24 @@ const DELETE_MERCHANT_REQUEST = 'DELETE_MERCHANT_REQUEST';
 const DELETE_MERCHANT_SUCCESS = 'DELETE_MERCHANT_SUCCESS';
 const DELETE_MERCHANT_FAILURE = 'DELETE_MERCHANT_FAILURE';
 
-const { merchantsRequest, merchantsSuccess, merchantsFailure, deleteMerchantSuccess } = createActions(
+const {
+  merchantsRequest,
+  merchantsSuccess,
+  merchantsFailure,
+  deleteMerchantSuccess
+} = createActions(
   MERCHANTS_REQUEST,
   MERCHANTS_SUCCESS,
   MERCHANTS_FAILURE,
   DELETE_MERCHANT_SUCCESS
 );
 
-export { merchantsRequest, merchantsSuccess, merchantsFailure, deleteMerchantSuccess };
+export {
+  merchantsRequest,
+  merchantsSuccess,
+  merchantsFailure,
+  deleteMerchantSuccess
+};
 
 export const fetchMerchants = () => ({
   [RSAA]: {

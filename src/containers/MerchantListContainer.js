@@ -8,10 +8,13 @@ const mapStateToProps = state => ({
   merchants: getMerchants(state)
 });
 
-const withData = connect(mapStateToProps, {
-  fetchMerchants,
-  deleteMerchant
-});
+const withData = connect(
+  mapStateToProps,
+  {
+    fetchMerchants,
+    deleteMerchant
+  }
+);
 
 const withLifecycle = lifecycle({
   componentDidMount() {

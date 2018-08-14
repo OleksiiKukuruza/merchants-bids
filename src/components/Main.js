@@ -6,18 +6,9 @@ import EditMerchantContainer from '../containers/EditMerchantContainer';
 
 const Main = () => (
   <Switch>
-    <Route
-      path="/merchants/:id/edit"
-      component={EditMerchantContainer}
-    />
-    <Route
-      path="/merchants/new"
-      component={NewMerchantContainer}
-    />
-    <Route
-      path="/merchants"
-      component={MerchantListContainer}
-    />
+    <Route path="/merchants/:id/edit" component={EditMerchantContainer} />
+    <Route path="/merchants/new" component={NewMerchantContainer} />
+    <Route path="/merchants" component={MerchantListContainer} />
   </Switch>
 );
 
