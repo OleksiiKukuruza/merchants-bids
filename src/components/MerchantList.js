@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const MerchantList = ({ merchants }) => (
+const MerchantList = ({ merchants, deleteMerchant }) => (
   <div>
     {merchants.map(merchant => (
       <div key={merchant.id}>
@@ -17,6 +17,12 @@ const MerchantList = ({ merchants }) => (
         <div>
           {merchant.hasPremium}
         </div>
+        <Link to={`/merchants/${merchant.id}/edit`}>
+          Edit Merchant
+        </Link>
+        <button onClick={() => deleteMerchant(merchant.id)}>
+          Remove merchant
+        </button>
       </div>
     ))}
     <Link to="/merchants/new">
@@ -40,7 +46,8 @@ MerchantList.propTypes = {
       amount: PropTypes.number.isRequired,
       created: PropTypes.string.isRequired
     })).isRequired
-  })).isRequired
+  })).isRequired,
+  deleteMerchant: PropTypes.func.isRequired
 };
 
 export default MerchantList;

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
 import MerchantList from '../components/MerchantList';
-import { fetchMerchants } from '../actions/merchants';
+import { deleteMerchant, fetchMerchants } from '../actions/merchants';
 import { getMerchants } from '../selectors';
 
 const mapStateToProps = state => ({
@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const withData = connect(mapStateToProps, {
-  fetchMerchants
+  fetchMerchants,
+  deleteMerchant
 });
 
 const withLifecycle = lifecycle({

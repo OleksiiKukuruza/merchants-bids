@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import union from 'lodash.union';
 import { combineActions, handleActions } from 'redux-actions';
-import { merchantsFailure, merchantsRequest, merchantsSuccess } from '../actions/merchants';
+import { deleteMerchantSuccess, merchantsFailure, merchantsRequest, merchantsSuccess } from '../actions/merchants';
 
 const allIds = handleActions({
-  [merchantsSuccess]: (state, { payload: { result } }) => union(state, result)
+  [merchantsSuccess]: (state, { payload: { result } }) => union(state, result),
+  [deleteMerchantSuccess]: (state, { payload: { result } }) => state.filter(id => id !== result),
 }, []);
 
 const loading = handleActions({
